@@ -10,3 +10,6 @@ Do dit only AFTER you have tested it.
 
 Please do not use this scrip to simply annoy people.
 It is only ment for those 'I decide what I see on the screen' kind of guys, to get some common sense in them that there is a bill to be paid at the end of eacht month, which they might help paying without even spending a dime...
+
+Example screenshot :
+https://cloud.githubusercontent.com/assets/9847102/5168053/3cd150c8-73fc-11e4-88b6-b8aef2a142c3.png 
