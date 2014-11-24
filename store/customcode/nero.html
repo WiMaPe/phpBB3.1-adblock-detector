@@ -1,0 +1,77 @@
+<script type="text/javascript" src="../../../../../forum/advertisment.js"></script>
+
+<!-- it contains a lot of make-up attributes, you could get away with just <div id="adblocker"></div> -->
+<div id="adblocker" style="postion: relative; border: 1px solid; border-radius: 12px; padding: 7px 20px; margin: 10px; box-shadow: 10px 10px 5px #888888; font-family: arial, helvetica, 'Liberation Sans', sans-serif; font-size: 10px; line-height: 15px; background: -webkit-linear-gradient(#eef5f9,#cadceb); background: -o-linear-gradient(#eef5f9, #cadceb); background: -moz-linear-gradient#eef5f9, #cadceb); background: linear-gradient(#eef5f9, #cadceb); font: italic 14px/20px Georgia, serif;"></div>
+
+<script> 
+		// cookie writing function
+		//
+		function setSNookie(cname, cvalue, exdays) 
+		{
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires="+d.toUTCString();
+		document.cookie = cname + "=" + cvalue + "; " + expires;
+		}
+
+		// cookie reading and splitting function
+		//
+		function getSNookie(cname) 
+		{
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0; i<ca.length; i++) 
+			{
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1);
+				if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+			}
+			return "";
+		}
+
+  // here we are going to decide which months the adblock detector must work
+	var adblockerdate = new Date();	
+	var adblockermonth = adblockerdate.getMonth() + 1;
+	var adblockerthismonth = ( adblockermonth == 2 || adblockermonth == 4 || adblockermonth == 6 || adblockermonth == 8 || adblockermonth == 10 || adblockermonth == 12) ? true : false ;
+
+  // in case you want to enable the adblock detector eacht month, remove the slashes by the following command
+  // var adblockerthismonth = true;
+
+	// we are going to renamde the <div id="adblocker"> in something different
+	//
+	// var idname = Math.floor((Math.random() * 1000000) + 1); // a random number
+	// or
+	var idname = Math.round(new Date().getTime() / 1000); // a timer
+	document.getElementById("adblocker").setAttribute("id", idname); 
+	
+	function removeElement()
+		{
+		    document.getElementById(idname).style.visibility = "hidden" ;
+		    document.getElementById(idname).style.display="none";
+		}
+	
+	function removeElementSetCookie()
+		{
+		    removeElement(); 
+		    setSNookie("noticedandclickedaway",1,5); // 5 is the number of days the banner wil not be shown again
+		}
+
+	noticedandclickedaway = getSNookie("noticedandclickedaway"); // already clicked the message away OR wrong month ?
+
+	if (noticedandclickedaway == "1" || adblockerthismonth == false ) 
+		{
+		removeElement();
+		}
+		
+	if (document.getElementById("tester") != undefined ) 
+		{
+		// AdBlocker is not active, so no need to show a blue banner, even when there is no text in it.
+		removeElement();
+		}
+		else
+		{
+		// yup, adblocker was active, got news for you....
+		document.getElementById(idname).innerHTML="oh..hello<p>oh dear oh dear, everything on internet is free, huh ?<br />Except for the owner of this site, who is still paying the bills to keep this site up and delivers *YOU* content free of any costs.<br />You could actually pay without using money by whitelisting this site, so the owner of it has some revenue to pay the bills with.<br/>As an matter of fact: It would cost you still *NOTHING* yet you would help the site owner and the community !<br><br><input class=\"box\" type=\"button\" onclick=\"removeElementSetCookie()\" value=\"Remove this banner\" /><span id=\"daysgone\" style=\"font-size: xx-small\"> (5 days)</span>";
+		}
+		// end of internet most hated script, made by WiMaPe, programming since 1981
+</script>
